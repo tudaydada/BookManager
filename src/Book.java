@@ -1,5 +1,5 @@
 public class Book {
-	private String ten, ID, tacGia, theLoai, NXB;
+	private String ten, ID, tacGia, theLoai, NXB,dmm;
 	private int giaTien, soLuong, daBan;
 	
 	public Book() {
