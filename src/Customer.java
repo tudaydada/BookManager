@@ -44,12 +44,12 @@ public class Customer extends Person {
 		return sachDaMua;
 	}
 
-	public void setSachDaMua(ArrayList<Book> sachDaMua) {
-		this.sachDaMua = sachDaMua;
+	public void setSachMua(Book sachDaMua) {
+		this.sachDaMua.add(sachDaMua);
 	}
 	public void display() {
 		System.out.println("[ID: " + ID+"/"+"Ten khach hang : " + this.getTen()+"/"+"tuoi : " + this.getTuoi()+"/"+"dia chi : "
-				+ this.getDiaChi()+"/"+"so dien thoai : " + soDT+"/"+"so lan mua : " + amount+"]");
+				+ this.getDiaChi()+"/"+"so dien thoai : " + soDT+"/"+"so lan mua : " + amount+"/sach da mua: "+sachDaMua+"]");
 
 
 	}

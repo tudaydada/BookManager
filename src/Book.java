@@ -83,15 +83,29 @@ public class Book {
 	}
 	
 	public void display() {
-		System.out.println("ID : " + ID);
-		System.out.println("Ten sach : " + ten);
-		System.out.println("Tac gia : " + tacGia);
-		System.out.println("The Loai : " + theLoai);
-		System.out.println("Nha Xuat Ban : " + NXB);
-		System.out.println("Gia tien : " + giaTien);
-		System.out.println("So luong nhap ve : " + soLuong);
-		System.out.println("So luong da ban : " + daBan);
-		System.out.println("So luong con lai : " + (int)(soLuong - daBan));
+		System.out.println("\n ID : " + ID);
+		System.out.print("/Ten sach : " + ten);
+		System.out.print("/Tac gia : " + tacGia);
+		System.out.print("/The Loai : " + theLoai);
+		System.out.print("/Nha Xuat Ban : " + NXB);
+		System.out.print("/Gia tien : " + giaTien);
+		System.out.print("/So luong nhap ve : " + soLuong);
+		System.out.print("/So luong da ban : " + daBan);
+		System.out.print("/So luong con lai : " + (int)(soLuong - daBan));
+	}
+
+	@Override
+	public String toString(){
+		return "Book{" +
+				"ten='" + ten + '\'' +
+				", ID='" + ID + '\'' +
+				", tacGia='" + tacGia + '\'' +
+				", theLoai='" + theLoai + '\'' +
+				", NXB='" + NXB + '\'' +
+				", giaTien=" + giaTien +
+				", soLuong=" + soLuong +
+				", daBan=" + daBan +
+				'}';
 	}
 }
 

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+
 public class Manager extends Person {
 	Scanner scan = new Scanner(System.in);
 	ArrayList<Book> quanLiSach = new ArrayList<>();
@@ -10,7 +11,8 @@ public class Manager extends Person {
 	public Manager() {
 		
 	}
-	
+
+
 	public Manager(String ten, String diaChi, int tuoi) {
 		super(ten,diaChi,tuoi);
 	}
@@ -72,6 +74,224 @@ public class Manager extends Person {
 		}
 	}
 
+	public void BuyBook(){
+
+		Scanner sc = new Scanner(System.in);
+		if(quanLiSach.size()<1) {
+			System.out.println("\t [kho sách đang rỗng ] \n vui lòng quay lại sau!");
+			System.out.print("Co muon tiep tuc? 0/1 : ");
+			int stop = Integer.valueOf(sc.nextInt());
+			if (stop == 0) {
+				System.out.println("tam biet !");
+				return;
+				}
+		}
+		else
+		{
+			System.out.println(quanLiSach);
+		System.out.print("nhap ID:");
+		String ID = String.valueOf(sc.nextLine());
+		boolean check=false;
+		int index;
+		for (int i = 0; i < quanLiSach.size(); i++) {
+			if (quanLiSach.get(i).getID().equals(ID)) {
+				if (quanLiSach.get(i).getSoLuong() < 1)
+					System.out.println("rất tiếc sách bạn đã hết , \n bạn thử chọn quyển sách khách xem sao !");
+				else {
+					System.out.println("bạn muốn mua số lượng là bao nhiêu ? (0-" + quanLiSach.get(i).getSoLuong() + ")");
+					System.out.print("vui lòng nhập: ");
+					int soluong = Integer.valueOf(sc.nextLine());
+					if (soluong <= 0 || soluong > quanLiSach.get(i).getSoLuong()) {
+						System.out.println("số lượng sách không hợp lệ , vui lòng nhập lại !");
+					}
+					else
+					{
+						quanLiSach.get(i).setSoLuong(quanLiSach.get(i).getSoLuong()-soluong);
+						addCustomer();
+						quanLiKhach.get(quanLiSach.size()-1).setSachMua(quanLiSach.get(i));
+					}
+					break;
+				}}else{
+					System.out.println("ID bạn chọn không hợp lệ , vui lòng chọn lại ");
+				}
+
+		}}}
+
+
+
+	public void quanlisach()
+		{
+			Scanner sc = new Scanner(System.in);
+			int stop=0;
+			int stop1,stop2;
+			int choose ;
+			System.out.println("\n\t\t === Quan li sach ===");
+			do {
+				System.out.print("\t 0. Tro lai");
+				System.out.print("\t 1. Them sach");
+				System.out.print("\t 2. Tim sach");
+				System.out.println("\t 3. Sap xep");
+
+				System.out.print("Moi lua chon: ");
+				choose = Integer.valueOf(sc.nextLine());
+				switch (choose) {
+					case 1:
+						do{
+							addBook();
+							System.out.println("Tiep? 0/1 ");
+							stop2=Integer.valueOf(sc.nextLine());}
+						while (stop2==1);
+						stop = 1;
+						break;
+					case 2:
+						System.out.print("1. Tim theo ten");
+						System.out.print("\t 2. Tim theo tac gia");
+						System.out.print("\t 3. Tim theo the loai");
+						System.out.println("\t 4. Tim theo Nha xuat ban");
+
+						System.out.print("Moi lua chon: ");
+						choose = Integer.valueOf(sc.nextLine());
+						switch (choose) {
+							case 1:
+								System.out.print("Nhap sach can tim: ");
+								String bookName = sc.nextLine();
+								findNameBook(bookName);
+								break;
+							case 2:
+								System.out.print("Nhap tac gia can tim: ");
+								String bookAuthor = sc.nextLine();
+								findAuthor(bookAuthor);
+								break;
+							case 3:
+								System.out.print("Nhap sach the loai can tim: ");
+								String bookKind = sc.nextLine();
+								findKindBook(bookKind);
+								break;
+							case 4:
+								System.out.print("Nhap Nha xuat ban can tim: ");
+								String bookNXB = sc.nextLine();
+								findNXB(bookNXB);
+								break;
+						}
+						break;
+					case 3:
+						System.out.print("1. Sap xep theo ten");
+						System.out.print("\t 2. Sap xep theo sach pho bien");
+						System.out.println("\t 3. Sap xep theo gia tien");
+						System.out.print("Moi lua chon: ");
+						choose = Integer.valueOf(sc.nextLine());
+						switch (choose) {
+							case 1:
+								sortNameBook();
+								break;
+							case 2:
+								sortPopular();
+								break;
+							case 3:
+								sortPrice();
+								break;
+						}
+						break;
+					case 0:
+						System.out.println("Tiep? 0/1 ");
+						break;
+				}
+				break;
+			} while (stop == 1);
+		}
+	public void quanlikhachhang(){
+		Scanner sc = new Scanner(System.in);
+		int stop=0;
+		int stop1;
+		System.out.println("\n\t\t === Quan li khach hang ===");
+
+		int choose;
+		do {
+
+
+			System.out.print("1. Them khach hang");
+			System.out.print("\t 2. Tim khach hang");
+			System.out.println("\t 3. danh sach khach hang");
+			System.out.print("Moi lua chon: ");
+			choose = Integer.valueOf(sc.nextLine());
+			switch (choose) {
+				case 1:
+					addCustomer();
+					break;
+				case 2:
+					System.out.print("1. Tim theo ten");
+					System.out.print("\t 2.Tim theo ID");
+					System.out.println("\t 3.Tim theo so dien thoai");
+					System.out.print("Moi lua chon: ");
+					choose = Integer.valueOf(sc.nextLine());
+					switch (choose) {
+						case 1:
+							System.out.print("Nhap ten can tim: ");
+							String customerName = sc.nextLine();
+							findNameCustomer(customerName);
+							break;
+						case 2:
+							System.out.print("Nhap tac gia can tim: ");
+							String bookAuthor = sc.nextLine();
+							findIdCustomer(bookAuthor);
+							break;
+						case 3:
+							System.out.print("Nhap so dien thoai can tim: ");
+							String bookKind = sc.nextLine();
+							findNumberPhoneCustomer(bookKind);
+							break;
+					}
+					break;
+				case 3:
+					System.out.println("\t danh sach khach hang");
+					sortNameCustomer();
+					break;
+			}
+			System.out.println("Tiep? 0/1 ");
+			stop1 = Integer.valueOf(sc.nextLine());
+		} while (stop1 == 1);
+	}
+
+	public void Store()
+	{
+		Scanner sc = new Scanner(System.in);
+
+		Manager manager = new Manager("Thu", "Viet Nam", 16);
+
+		System.out.println("\t===Welcom to my tiem sach!===");
+
+		int stop=0;
+		do {
+			System.out.print(" 0. mua sach");
+			System.out.print("\t 1. Quan li sach");
+			System.out.println("\t 2. Quan li khach hang");
+
+			System.out.print("Moi lua chon: ");
+			int choose = Integer.valueOf(sc.nextLine());
+
+			int stop1;
+			if (choose == 1) {
+				manager.quanlisach();
+			}
+			else if (choose == 2) {
+				manager.quanlikhachhang();
+			}
+			else if(choose==0){
+				System.out.println("\t chọn sách bạn muốn mua theo ID tương ứng của sách đó ");
+				manager.BuyBook();
+			}
+			else {
+				System.out.print("Co muon tiep tuc? 0/1 : ");
+				stop = Integer.valueOf(sc.nextInt());
+				if (stop == 0) {
+					System.out.println("tam biet !");
+					return;
+				} else
+					Store();
+			}
+		} while (true);
+	}
+
 	public void addCustomer() {
 		Customer customerAdd = null;
 		String ten,diachi,ID, soDT;
@@ -93,11 +313,15 @@ public class Manager extends Person {
 
 
 
+
+
+
 		//check neu sach da co trong kho thi soluong=soluonghientai+soluongvuanhap
 		for (int i = 0; i < quanLiKhach.size(); i++) {
 			if (quanLiKhach.get(i).getID().equals(ID)) {
 				quanLiKhach.get(i).setAmount(quanLiKhach.get(i).getAmount() + 1);
 				check = false;
+				System.out.println("");
 				break;
 			}
 		}
