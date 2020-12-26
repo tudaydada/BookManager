@@ -1,6 +1,6 @@
 public class Book {
 	private String ten, ID, tacGia, theLoai, NXB;
-	private int giaTien, soLuong, daBan,hello;
+	private int giaTien, soLuong, daBan;
 	
 	public Book() {
 		
