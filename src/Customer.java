@@ -1,27 +1,52 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Customer extends Person {
 	private String ID, soDT;
-	private int amount;
-	ArrayList<Book> sachDaMua;
-	
+	private  int visitNumber = 0;
+	private  ArrayList<BuyBookRecord> buyBookRecord;
+	private class BuyBookRecord {
+		public BuyBookRecord( Book sachDaMua,int amount) {
+			this.amount = amount;
+			this.sachDaMua = sachDaMua;
+		}
+
+		int amount;
+		Book sachDaMua;
+
+		public int getAmount() {
+			return amount;
+		}
+
+		public void setAmount(int amount) {
+			this.amount = amount;
+		}
+
+		public Book getSachDaMua() {
+			return sachDaMua;
+		}
+
+		public void setSachDaMua(Book sachDaMua) {
+			this.sachDaMua = sachDaMua;
+		}
+	}
+
 	public Customer() {
-		
 	}
-
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public  BuyBookRecord getBuyBookRecord(String BookId){
+		for (int i = 0 ; i< buyBookRecord.size();i++){
+			if(buyBookRecord.get(i).sachDaMua.getID() == BookId){
+				return buyBookRecord.get(i);
+			}
+		}
+		return null;
 	}
 
 	public Customer(String iD, String ten, int tuoi, String soDT, String diaChi) {
 		super(ten, diaChi, tuoi);
 		ID = iD;
 		this.soDT = soDT;
-
+		this.buyBookRecord = new ArrayList<BuyBookRecord>();
 	}
 
 	public String getID() {
@@ -40,17 +65,35 @@ public class Customer extends Person {
 		this.soDT = soDT;
 	}
 
-	public ArrayList<Book> getSachDaMua() {
-		return sachDaMua;
+	public void muaSach(Book sachMua, int amout) {
+		boolean isExistInHistory = false;
+		for(int i=0; i< buyBookRecord.size();i++){
+			if(sachMua.getID() == buyBookRecord.get(i).sachDaMua.getID()){
+				isExistInHistory = true;
+				break;
+			}
+		}
+		if(isExistInHistory){
+			var currentBookHistory = getBuyBookRecord(sachMua.getID());
+			currentBookHistory.setAmount(currentBookHistory.getAmount() + amout);
+		} else {
+			var newBookHistory = new BuyBookRecord(sachMua,amout);
+			buyBookRecord.add(newBookHistory);
+		}
+		visitNumber++;
 	}
-
-	public void setSachMua(Book sachDaMua) {
-		this.sachDaMua.add(sachDaMua);
-	}
-	public void display() {
-		System.out.println("[ID: " + ID+"/"+"Ten khach hang : " + this.getTen()+"/"+"tuoi : " + this.getTuoi()+"/"+"dia chi : "
-				+ this.getDiaChi()+"/"+"so dien thoai : " + soDT+"/"+"so lan mua : " + amount+"/sach da mua: "+sachDaMua+"]");
-
-
+	public void displayHistoryBuy() {
+		System.out.println("------------------------------------");
+		System.out.println("[ID: " + ID+"/"+"Ten khach hang : ");
+		System.out.println("Ten khach hang : " + this.getTen());
+		System.out.println("dia chi : "+ this.getDiaChi());
+		System.out.println("so dien thoai : " + soDT);
+		System.out.println("so lan mua : " + visitNumber);
+		ArrayList<String> bookBought = new ArrayList<String>();
+		for ( int i = 0;i<buyBookRecord.size();i++){
+			bookBought.add(buyBookRecord.get(i).sachDaMua.getTen());
+		}
+		System.out.println("sach da mua: : " + String.join(", ",bookBought));
+		System.out.println("------------------------------------");
 	}
 }
