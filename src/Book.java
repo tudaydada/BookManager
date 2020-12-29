@@ -1,7 +1,7 @@
 public class Book {
 	private String ten, ID, tacGia, theLoai, NXB;
 	private int giaTien, soLuong, daBan;
-	// hello world;
+
 	public Book() {
 		
 	}
@@ -96,15 +96,15 @@ public class Book {
 
 	@Override
 	public String toString(){
-		return "Book{" +
-				"ten='" + ten + '\'' +
-				", ID='" + ID + '\'' +
-				", tacGia='" + tacGia + '\'' +
-				", theLoai='" + theLoai + '\'' +
-				", NXB='" + NXB + '\'' +
-				", giaTien=" + giaTien +
-				", soLuong=" + soLuong +
-				", daBan=" + daBan +
+		return "Book {" +
+				"ten = '" + ten + '\'' +
+				", ID = '" + ID + '\'' +
+				", tacGia = '" + tacGia + '\'' +
+				", theLoai = '" + theLoai + '\'' +
+				", NXB = '" + NXB + '\'' +
+				", giaTien = " + giaTien +
+				", soLuong = " + soLuong +
+				", daBan = " + daBan +
 				'}';
 	}
 }
