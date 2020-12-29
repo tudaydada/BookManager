@@ -113,6 +113,7 @@ public class Manager extends Person {
                                 System.out.println("số lượng sách không hợp lệ , vui lòng nhập lại !");
                                 invalidNumberInput = true;
                             } else {
+                                currentBook.setDaBan(soluong);
                                 currentBook.setSoLuong(currentNumber - soluong);
                                 //thêm vào danh sách mua
                                 var newCustomer =  addCustomer();
@@ -125,9 +126,10 @@ public class Manager extends Person {
                     }
                 } else {
                     System.out.println("ID bạn chọn không hợp lệ , vui lòng chọn lại ");
-                    isContinueBuyBook = true;
+                    isContinueBuyBook = false;
                 }
             }
+
         }
     }
 
@@ -237,8 +239,7 @@ public class Manager extends Person {
 
         int choose;
         do {
-
-
+            
             System.out.print("1. Them khach hang");
             System.out.print("\t 2. Tim khach hang");
             System.out.println("\t 3. danh sach khach hang");
@@ -273,8 +274,10 @@ public class Manager extends Person {
                     }
                     break;
                 case 3:
-                    System.out.println("\t danh sach khach hang");
-                    sortNameCustomer();
+                    System.out.println("\t\t danh sach khach hang");
+                    /*System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("    ID      |   tên khách hàng    |         Địa chỉ         |       SĐT     |   Số lần mua  |  Sách đã mua         ");
+                    */sortNameCustomer();
                     break;
             }
             System.out.println("Tiep? 0/1 ");
@@ -287,11 +290,11 @@ public class Manager extends Person {
 
         Manager manager = new Manager("Thu", "Viet Nam", 16);
 
-        System.out.println("\t===Welcom to my tiem sach!===");
+        System.out.println("\t\t===Welcom to my tiem sach!===");
 
         int stop = 0;
         do {
-            System.out.print(" 0. mua sach");
+            System.out.print("\n 0. mua sach");
             System.out.print("\t 1. Quan li sach");
             System.out.println("\t 2. Quan li khach hang");
 
@@ -312,8 +315,7 @@ public class Manager extends Person {
                 if (stop == 0) {
                     System.out.println("tam biet !");
                     return;
-                } else
-                    Store();
+                }
             }
         } while (true);
     }
@@ -338,9 +340,10 @@ public class Manager extends Person {
 
 
             //check neu sach da co trong kho thi soluong=soluonghientai+soluongvuanhap
-            for (int i = 0; i < quanLiKhach.size(); i++) {
+            int i;
+            for ( i= 0; i < quanLiKhach.size(); i++) {
                 if (quanLiKhach.get(i).getID().equals(ID)) {
-//                quanLiKhach.get(i).setAmount(quanLiKhach.get(i).getAmount() + 1);
+                //quanLiKhach.get(i).setAmount(quanLiKhach.get(i).getAmount() + 1);
                     check = false; break;
                 }
             }
@@ -349,9 +352,12 @@ public class Manager extends Person {
                 customerAdd = new Customer(ID, ten, tuoi, soDT, diachi);
                 quanLiKhach.add(customerAdd);
                 return  customerAdd;
-            }else {
-                System.out.println("Khach hang da ton tai");
-                isContinue = true;
+            }
+            else {
+                /*System.out.println("Khach hang da ton tai");*/
+                //quanLiKhach.get(i).setVisitNumber(1);
+                return quanLiKhach.get(i);
+
             }
         }
         return  null;
