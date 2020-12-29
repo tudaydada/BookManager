@@ -5,14 +5,14 @@ public class Customer extends Person {
 	private String ID, soDT;
 	private  int visitNumber = 0;
 	private  ArrayList<BuyBookRecord> buyBookRecord;
+
 	private class BuyBookRecord {
+		int amount;
+		Book sachDaMua;
 		public BuyBookRecord( Book sachDaMua,int amount) {
 			this.amount = amount;
 			this.sachDaMua = sachDaMua;
 		}
-
-		int amount;
-		Book sachDaMua;
 
 		public int getAmount() {
 			return amount;
@@ -82,18 +82,34 @@ public class Customer extends Person {
 		}
 		visitNumber++;
 	}
+
+	public int getVisitNumber() {
+		return visitNumber;
+	}
+
+	public void setVisitNumber(int visitNumber) {
+		this.visitNumber += visitNumber;
+	}
+
 	public void displayHistoryBuy() {
-		System.out.println("------------------------------------");
-		System.out.println("[ID: " + ID+"/"+"Ten khach hang : ");
-		System.out.println("Ten khach hang : " + this.getTen());
-		System.out.println("dia chi : "+ this.getDiaChi());
-		System.out.println("so dien thoai : " + soDT);
-		System.out.println("so lan mua : " + visitNumber);
+		System.out.println("--------------------------------------------");
+		System.out.println("ID				 : " + ID);
+		System.out.println("Ten khach hang	 : " + this.getTen());
+		System.out.println("dia chi 		 : "+ this.getDiaChi());
+		System.out.println("so dien thoai	 : " + soDT);
+		System.out.println("so lan mua 		 : " + visitNumber);
 		ArrayList<String> bookBought = new ArrayList<String>();
 		for ( int i = 0;i<buyBookRecord.size();i++){
 			bookBought.add(buyBookRecord.get(i).sachDaMua.getTen());
 		}
-		System.out.println("sach da mua: : " + String.join(", ",bookBought));
-		System.out.println("------------------------------------");
+		System.out.println("sach da mua  	 : " + String.join(", ",bookBought));
+		System.out.println("--------------------------------------------");
+		/*ArrayList<String> bookBought = new ArrayList<String>();
+		for ( int i = 0;i<buyBookRecord.size();i++){
+			bookBought.add(buyBookRecord.get(i).sachDaMua.getTen());
+		}
+		System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.println("   "+ID+"    / "+this.getTen()+"  / "+this.getDiaChi()+"   / "+soDT+"       /  "+visitNumber+"      /   "+String.join(",",bookBought)   );
+*/
 	}
 }
