@@ -1,14 +1,11 @@
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Main {
-		// hello
-	public static void main(String[] args){
-		Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException{
 
-		Manager manager = new Manager("Thu", "Viet Nam", 16);
+        Manager manager = new Manager("Thu", "Viet Nam", 16);
 
-
-		manager.Store();
-
-	}
+        manager.Store(manager);
+    }
 }
+
